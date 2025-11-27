@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome {{store_name ()}}</title>
-    <link rel="icon" src="{{ store_logo() }}" alt="Logo">
+    <title>Welcome <?php echo e(store_name ()); ?></title>
+    <link rel="icon" src="<?php echo e(store_logo()); ?>" alt="Logo">
     <style>
         * {
             margin: 0;
@@ -485,7 +485,7 @@
     <header>
         <div class="logo">
             <div class="logo-icon">🛒</div>
-            <span>{{store_name ()}} POS</span>
+            <span><?php echo e(store_name ()); ?> POS</span>
         </div>
         <nav class="nav-buttons">
             <a href="/login" class="btn btn-outline">Login</a>
@@ -497,7 +497,7 @@
     <div class="container">
         <div class="content">
             <h1>Modern <span class="highlight">Point of Sale</span> System</h1>
-            <p>Manage your retail business with ease and efficiency. {{store_name ()}} POS comes with comprehensive features to help boost your productivity and sales performance.</p>
+            <p>Manage your retail business with ease and efficiency. <?php echo e(store_name ()); ?> POS comes with comprehensive features to help boost your productivity and sales performance.</p>
             
             <div class="features">
                 <div class="feature-item">
@@ -666,4 +666,4 @@
         setInterval(loadDashboardData, 30000);
     </script>
 </body>
-</html>
+</html><?php /**PATH C:\laragon\www\app-pos-skyramart\resources\views/welcome.blade.php ENDPATH**/ ?>

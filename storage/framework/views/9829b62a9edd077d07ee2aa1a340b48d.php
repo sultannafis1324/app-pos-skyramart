@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-        <title>SkyraMart-POS</title>
+        <title><?php echo e(store_name()); ?></title>
 
-        <link rel="icon" href="<?php echo e(asset('images/Skyra-L1.png')); ?>" type="image/png">
+        <link rel="icon" src="<?php echo e(store_logo()); ?>" alt="Logo">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -39,7 +39,7 @@
         <!-- Footer -->
         <footer class="mt-auto border-t border-gray-200 dark:border-gray-700 bg-white/70 dark:bg-gray-900/50 backdrop-blur-md py-4">
             <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-500 dark:text-gray-400">
-                SkyraMart POS © <?php echo e(date('Y')); ?> — All rights reserved.
+                <?php echo e(store_name()); ?> © <?php echo e(date('Y')); ?> — All rights reserved.
             </div>
         </footer>
     </body>

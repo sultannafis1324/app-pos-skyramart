@@ -37,11 +37,14 @@ class CustomerMessageTemplate extends Model
             '{email}' => 'Customer Email',
             '{phone_number}' => 'Customer Phone Number',
             '{loyalty_points}' => 'Loyalty Points',
-            '{store_name}' => 'Store Name',
-            '{store_address}' => 'Store Address',
-            '{store_whatsapp}' => 'Store WhatsApp',
-            '{store_email}' => 'Store Email',
-            '{store_hours}' => 'Store Operating Hours',
+            '{store_name}' => 'Store Name (from Store Settings)',
+            '{store_address}' => 'Store Address (from Store Settings)',
+            '{store_whatsapp}' => 'Store WhatsApp (from Store Settings)',
+            '{store_phone}' => 'Store Phone (from Store Settings)',
+            '{store_email}' => 'Store Email (from Store Settings)',
+            '{store_hours}' => 'Store Operating Hours (from Store Settings)',
+            '{store_website}' => 'Store Website (from Store Settings)',
+            '{currency_symbol}' => 'Currency Symbol (from Store Settings)',
         ];
     }
 
@@ -50,17 +53,20 @@ class CustomerMessageTemplate extends Model
      */
     public function replaceVariables($text, $customer)
     {
+        // Get store settings
+        $store = StoreSetting::getActive();
+
         $replacements = [
             '{customer_name}' => $customer->customer_name ?? 'Valued Customer',
             '{email}' => $customer->email ?? '-',
             '{phone_number}' => $customer->phone_number ?? '-',
             '{loyalty_points}' => number_format($customer->loyalty_points ?? 0, 0, ',', '.'),
-            '{store_name}' => 'SkyraMart',
-            '{store_address}' => 'Jl. Masjid Daruttaqwa No. 123, Depok',
-            '{store_whatsapp}' => '0889-2114-416',
-            '{store_email}' => 'support@skyramart.com',
-            '{store_hours}' => 'Monday - Sunday, 08:00 - 22:00',
         ];
+
+        // Merge with store variables
+        if ($store) {
+            $replacements = array_merge($replacements, $store->getVariables());
+        }
 
         return str_replace(
             array_keys($replacements),
@@ -69,9 +75,6 @@ class CustomerMessageTemplate extends Model
         );
     }
 
-    /**
-     * Get active template by type
-     */
     public static function getActive($type)
     {
         return self::where('type', $type)

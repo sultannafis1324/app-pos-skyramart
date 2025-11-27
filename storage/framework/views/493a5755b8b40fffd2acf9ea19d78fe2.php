@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{store_name ()}} Reset Password</title>
-    <link rel="icon" src="{{ store_logo() }}" alt="Logo">
+    <title><?php echo e(store_name ()); ?> Reset Password</title>
+    <link rel="icon" src="<?php echo e(store_logo()); ?>" alt="Logo">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -127,8 +127,8 @@
             </div>
             
             <!-- Form Reset Password -->
-            <form method="POST" action="{{ route('password.email') }}" id="reset-form">
-                @csrf
+            <form method="POST" action="<?php echo e(route('password.email')); ?>" id="reset-form">
+                <?php echo csrf_field(); ?>
                 
                 <!-- Email Input -->
                 <div class="mb-6">
@@ -159,7 +159,7 @@
                         Send Reset Link
                     </button>
                     
-                    <a href="{{ route('login') }}" class="btn-secondary text-gray-700 font-medium py-3 px-4 rounded-lg border border-gray-300 text-center flex items-center justify-center">
+                    <a href="<?php echo e(route('login')); ?>" class="btn-secondary text-gray-700 font-medium py-3 px-4 rounded-lg border border-gray-300 text-center flex items-center justify-center">
                         <i class="fas fa-arrow-left mr-2"></i>
                         Back to Login
                     </a>
@@ -172,7 +172,7 @@
         // Simulasi status session (dalam implementasi nyata, ini akan berasal dari Laravel)
         document.addEventListener('DOMContentLoaded', function() {
             // Contoh status session (untuk demo)
-            const statusMessage = "{{ session('status') }}";
+            const statusMessage = "<?php echo e(session('status')); ?>";
             if (statusMessage) {
                 const statusElement = document.getElementById('session-status');
                 statusElement.textContent = statusMessage;
@@ -185,7 +185,7 @@
             }
             
             // Simulasi error (untuk demo)
-            const emailError = "{{ $errors->first('email') }}";
+            const emailError = "<?php echo e($errors->first('email')); ?>";
             if (emailError) {
                 const errorElement = document.getElementById('email-error');
                 errorElement.textContent = emailError;
@@ -213,4 +213,4 @@
         });
     </script>
 </body>
-</html>
+</html><?php /**PATH C:\laragon\www\app-pos-skyramart\resources\views/auth/forgot-password.blade.php ENDPATH**/ ?>

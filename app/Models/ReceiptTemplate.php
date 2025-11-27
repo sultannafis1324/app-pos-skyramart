@@ -28,9 +28,6 @@ class ReceiptTemplate extends Model
         'is_active' => 'boolean',
     ];
 
-    /**
-     * ✅ Available template variables (TIDAK BISA DIUBAH)
-     */
     public static function getAvailableVariables($type)
     {
         $commonVars = [
@@ -47,23 +44,29 @@ class ReceiptTemplate extends Model
             '{total}' => 'Total Amount',
             '{payment_method}' => 'Payment Method',
             '{payment_channel}' => 'Payment Channel/Bank',
+            // Store Variables
+            '{store_name}' => 'Store Name (from Store Settings)',
+            '{store_address}' => 'Store Address (from Store Settings)',
+            '{store_whatsapp}' => 'Store WhatsApp (from Store Settings)',
+            '{store_phone}' => 'Store Phone (from Store Settings)',
+            '{store_email}' => 'Store Email (from Store Settings)',
+            '{currency_symbol}' => 'Currency Symbol (from Store Settings)',
         ];
 
         if ($type === 'whatsapp') {
             return array_merge($commonVars, [
                 '{pdf_link}' => 'PDF Download Link',
-                '{store_whatsapp}' => 'Store WhatsApp Number',
             ]);
         }
 
         return $commonVars;
     }
 
-    /**
-     * ✅ Replace variables dengan data real
-     */
     public function replaceVariables($text, $data)
     {
+        // Get store settings
+        $store = StoreSetting::getActive();
+
         $replacements = [
             '{customer_name}' => $data['customer_name'] ?? 'Walk-in Customer',
             '{transaction_number}' => $data['transaction_number'] ?? '-',
@@ -78,8 +81,12 @@ class ReceiptTemplate extends Model
             '{payment_method}' => strtoupper($data['payment_method'] ?? 'CASH'),
             '{payment_channel}' => $data['payment_channel'] ?? '-',
             '{pdf_link}' => $data['pdf_link'] ?? '',
-            '{store_whatsapp}' => '0889-2114-416',
         ];
+
+        // Merge with store variables
+        if ($store) {
+            $replacements = array_merge($replacements, $store->getVariables());
+        }
 
         return str_replace(
             array_keys($replacements),
@@ -88,9 +95,6 @@ class ReceiptTemplate extends Model
         );
     }
 
-    /**
-     * ✅ Get active template by type
-     */
     public static function getActive($type)
     {
         return self::where('type', $type)
@@ -98,9 +102,6 @@ class ReceiptTemplate extends Model
             ->first();
     }
 
-    /**
-     * ✅ Scopes
-     */
     public function scopeWhatsapp($query)
     {
         return $query->where('type', 'whatsapp');

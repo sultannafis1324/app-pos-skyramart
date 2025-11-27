@@ -18,7 +18,7 @@ use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\ReceiptTemplateController;
 use App\Http\Controllers\LossReportController;
 use App\Http\Controllers\CustomerMessageTemplateController;
-
+use App\Http\Controllers\StoreSettingController;
 
 
 // Form "Lupa Password"
@@ -282,6 +282,17 @@ Route::middleware(['auth', 'web'])->prefix('api')->group(function () {
         Route::get('/{id}/preview', [CustomerMessageTemplateController::class, 'preview'])->name('customer-message-templates.preview');
         Route::post('/{id}/reset', [CustomerMessageTemplateController::class, 'reset'])->name('customer-message-templates.reset');
     });
+});
+
+    Route::middleware(['auth'])->group(function () {
+    Route::get('/store-settings', [StoreSettingController::class, 'index'])
+        ->name('store-settings.index');
+    Route::put('/store-settings', [StoreSettingController::class, 'update'])
+        ->name('store-settings.update');
+    Route::delete('/store-settings/logo', [StoreSettingController::class, 'deleteLogo'])
+        ->name('store-settings.delete-logo');
+    Route::get('/store-settings/preview', [StoreSettingController::class, 'preview'])
+        ->name('store-settings.preview');
 });
     
     // Sales API

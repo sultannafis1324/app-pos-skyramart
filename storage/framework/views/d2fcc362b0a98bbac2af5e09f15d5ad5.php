@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{store_name ()}} New Password</title>
-    <link rel="icon" src="{{ store_logo() }}" alt="Logo">
+    <title><?php echo e(store_name ()); ?> New Password</title>
+    <link rel="icon" src="<?php echo e(store_logo()); ?>" alt="Logo">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -155,11 +155,11 @@
             </div>
             
             <!-- Form Reset Password -->
-            <form method="POST" action="{{ route('password.store') }}" id="reset-form">
-                @csrf
+            <form method="POST" action="<?php echo e(route('password.store')); ?>" id="reset-form">
+                <?php echo csrf_field(); ?>
 
                 <!-- Password Reset Token -->
-                <input type="hidden" name="token" value="{{ $request->route('token') }}">
+                <input type="hidden" name="token" value="<?php echo e($request->route('token')); ?>">
 
                 <!-- Email Address -->
                 <div class="mb-6">
@@ -170,7 +170,7 @@
                             name="email" 
                             type="email" 
                             class="form-input w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            value="{{ old('email', $request->email) }}" 
+                            value="<?php echo e(old('email', $request->email)); ?>" 
                             required 
                             autofocus 
                             autocomplete="username"
@@ -237,7 +237,7 @@
                         Reset Password
                     </button>
                     
-                    <a href="{{ route('login') }}" class="btn-secondary text-gray-700 font-medium py-3 px-4 rounded-lg border border-gray-300 text-center flex items-center justify-center">
+                    <a href="<?php echo e(route('login')); ?>" class="btn-secondary text-gray-700 font-medium py-3 px-4 rounded-lg border border-gray-300 text-center flex items-center justify-center">
                         <i class="fas fa-arrow-left mr-2"></i>
                         Kembali ke Login
                     </a>
@@ -300,21 +300,21 @@
             });
             
             // Simulasi error (untuk demo)
-            const emailError = "{{ $errors->first('email') }}";
+            const emailError = "<?php echo e($errors->first('email')); ?>";
             if (emailError) {
                 const errorElement = document.getElementById('email-error');
                 errorElement.textContent = emailError;
                 errorElement.classList.remove('hidden');
             }
             
-            const passwordError = "{{ $errors->first('password') }}";
+            const passwordError = "<?php echo e($errors->first('password')); ?>";
             if (passwordError) {
                 const errorElement = document.getElementById('password-error');
                 errorElement.textContent = passwordError;
                 errorElement.classList.remove('hidden');
             }
             
-            const passwordConfirmationError = "{{ $errors->first('password_confirmation') }}";
+            const passwordConfirmationError = "<?php echo e($errors->first('password_confirmation')); ?>";
             if (passwordConfirmationError) {
                 const errorElement = document.getElementById('password-confirmation-error');
                 errorElement.textContent = passwordConfirmationError;
@@ -345,4 +345,4 @@
         });
     </script>
 </body>
-</html>
+</html><?php /**PATH C:\laragon\www\app-pos-skyramart\resources\views/auth/reset-password.blade.php ENDPATH**/ ?>

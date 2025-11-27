@@ -8,14 +8,13 @@
                 <div class="shrink-0 flex items-center">
                     <a href="<?php echo e(route('dashboard')); ?>" class="flex items-center group transition-all duration-300">
                         <div class="relative">
-                            <img src="<?php echo e(asset('images/Skyra-L1.png')); ?>" 
-                                alt="SkyraMart Logo" 
+                            <img src="<?php echo e(store_logo()); ?>" alt="Logo" 
                                 class="h-10 w-auto transform group-hover:scale-110 transition-transform duration-300">
                             <div class="absolute inset-0 bg-indigo-500 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"></div>
                         </div>
                         <!-- Tampilkan nama di semua ukuran layar -->
                         <span class="ml-3 text-xl font-bold bg-gradient-to-r from-sky-400 to-sky-600 bg-clip-text text-transparent">
-                            SkyraMart
+                            <h1><?php echo e(store_name()); ?></h1>
                         </span>
                     </a>
                 </div>
@@ -414,6 +413,52 @@
 <?php $component = $__componentOriginal68cb1971a2b92c9735f83359058f7108; ?>
 <?php unset($__componentOriginal68cb1971a2b92c9735f83359058f7108); ?>
 <?php endif; ?>
+                                    
+                                    <?php if (isset($component)) { $__componentOriginal68cb1971a2b92c9735f83359058f7108 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal68cb1971a2b92c9735f83359058f7108 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.dropdown-link','data' => ['href' => route('store-settings.index'),'class' => 'flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-300 
+           hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 
+           dark:hover:from-indigo-900/20 dark:hover:to-purple-900/20 
+           transition-all duration-200 group']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('dropdown-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['href' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(route('store-settings.index')),'class' => 'flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-300 
+           hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 
+           dark:hover:from-indigo-900/20 dark:hover:to-purple-900/20 
+           transition-all duration-200 group']); ?>
+
+    <svg class="w-4 h-4 mr-3 text-gray-400 group-hover:text-indigo-500 
+                transition-colors duration-200 flex-shrink-0"
+         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 
+                 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 
+                 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 
+                 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 
+                 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 
+                 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 
+                 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 
+                 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+
+    <span class="font-medium"><?php echo e(__('Store Settings')); ?></span>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal68cb1971a2b92c9735f83359058f7108)): ?>
+<?php $attributes = $__attributesOriginal68cb1971a2b92c9735f83359058f7108; ?>
+<?php unset($__attributesOriginal68cb1971a2b92c9735f83359058f7108); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal68cb1971a2b92c9735f83359058f7108)): ?>
+<?php $component = $__componentOriginal68cb1971a2b92c9735f83359058f7108; ?>
+<?php unset($__componentOriginal68cb1971a2b92c9735f83359058f7108); ?>
+<?php endif; ?>
+
 
                                     <form method="POST" action="<?php echo e(route('logout')); ?>">
                                         <?php echo csrf_field(); ?>
